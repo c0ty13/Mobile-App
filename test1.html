@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Приветствие</title>
+  <style>
+    /* Стили для контейнера приветствия */
+    .welcome-container {
+      background-color: #fff; /* Белый фон */
+      display: flex; /* Используем flexbox для выравнивания */
+      max-width: 480px; /* Максимальная ширина контейнера */
+      width: 100%; /* Ширина 100% от родительского элемента */
+      flex-direction: column; /* Элементы расположены в столбик */
+      overflow: hidden; /* Скрыть переполнение */
+      margin: 0 auto; /* Центрирование контейнера */
+      padding: 503px 38px 132px; /* Внутренние отступы */
+    }
+
+    /* Стили для заголовка приветствия */
+    .welcome-heading {
+      color: #000; /* Черный цвет текста */
+      text-align: center; /* Центрирование текста */
+      font: 700 24px 'Plus Jakarta Sans', -apple-system, Roboto, Helvetica, sans-serif; /* Шрифт и его параметры */
+    }
+
+    /* Стили для кнопки начала обучения */
+    .start-learning-btn {
+      align-self: center; /* Центрирование кнопки */
+      border-radius: 40px; /* Скругленные углы */
+      background-color: #0056D2; /* Цвет фона кнопки */
+      margin-top: 109px; /* Отступ сверху */
+      color: #fff; /* Белый цвет текста */
+      text-transform: uppercase; /* Преобразование текста в верхний регистр */
+      letter-spacing: 0.32px; /* Межбуквенный интервал */
+      padding: 15px 55px; /* Внутренние отступы */
+      font: 400 16px Inter, sans-serif; /* Шрифт и его параметры */
+      cursor: pointer; /* Указатель курсора при наведении */
+      border: none; /* Убираем границу */
+      transition: background-color 0.3s ease; /* Плавный переход цвета фона */
+    }
+
+    /* Стили для кнопки при наведении и фокусе */
+    .start-learning-btn:hover,
+    .start-learning-btn:focus {
+      background-color: #004abc; /* Изменение цвета фона */
+      outline: none; /* Убираем обводку */
+    }
+
+    /* Стили для кнопки при фокусе с видимой обводкой */
+    .start-learning-btn:focus-visible {
+      box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.4); /* Тень вокруг кнопки */
+    }
+
+    /* Стили для главного меню */
+    .search-container {
+      background-color: #fff;
+      display: flex;
+      max-width: 480px;
+      width: 100%;
+      flex-direction: column;
+      overflow: hidden;
+      margin: 0 auto;
+      padding: 76px 20px 541px;
+    }
+
+    .welcome-message {
+      color: #000;
+      text-align: center;
+      align-self: start;
+      font: 700 20px Plus Jakarta Sans, -apple-system, Roboto, Helvetica, sans-serif;
+    }
+
+    .search-bar {
+      border-radius: 100px;
+      display: flex;
+      margin-top: 35px;
+      align-items: center;
+      gap: 15px;
+      padding: 10px 16px;
+      border: 1px solid #afafaf;
+    }
+
+    .search-icon-wrapper {
+      border-radius: 5px;
+      background-color: #0056d2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      padding: 5px;
+    }
+
+    .search-icon {
+      aspect-ratio: 1;
+      object-fit: contain;
+      width: 20px;
+    }
+
+    .search-placeholder {
+      color: #828282;
+      letter-spacing: 0.24px;
+      text-align: center;
+      font: 500 12px Plus Jakarta Sans, -apple-system, Roboto, Helvetica, sans-serif;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    .topics {
+      margin-top: 20px;
+      font: 600 16px Plus Jakarta Sans, -apple-system, Roboto, Helvetica, sans-serif;
+    }
+
+    .topic {
+      border-radius: 5px;
+      background-color: #f4f9ff;
+      margin-top: 21px;
+      color: #000;
+      white-space: nowrap;
+      padding: 48px 70px;
+      font: 600 13px Plus Jakarta Sans, -apple-system, Roboto, Helvetica, sans-serif;
+      border: 1px solid #cbcbcb;
+    }
+
+    .topic:hover {
+      background-color: #e0e0e0;
+    }
+
+    /* Стили для страницы "История" */
+    .history-container {
+      background-color: #fff;
+      display: none;
+      max-width: 480px;
+      width: 100%;
+      flex-direction: column;
+      overflow: hidden;
+      align-items: center;
+      margin: 0 auto;
+      padding: 43px 35px 117px 9px;
+    }
+
+    .back-button {
+      border-radius: 5px;
+      align-self: start;
+      display: flex;
+      width: 36px;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10px;
+    }
+
+    .back-icon {
+      aspect-ratio: 1;
+      object-fit: contain;
+      object-position: center;
+      width: 100%;
+    }
+
+    .category-badge {
+      align-self: stretch;
+      background-color: #0056D2;
+      margin-top: 239px;
+      gap: 17px;
+      color: #FFFDFD;
+      white-space: nowrap;
+      text-align: center;
+      letter-spacing: 0.28px;
+      padding: 10px 21px;
+      font: 500 14px Plus Jakarta Sans, -apple-system, Roboto, Helvetica, sans-serif;
+    }
+
+    .section-title {
+      color: #000;
+      letter-spacing: 0.4px;
+      margin-top: 19px;
+      font: 600 20px Plus Jakarta Sans, -apple-system, Roboto, Helvetica, sans-serif;
+    }
+
+    .section-description {
+      color: #818181;
+      letter-spacing: 0.1px;
+      margin-top: 125px;
+      font: 400 10px/17px Plus Jakarta Sans, -apple-system, Roboto, Helvetica, sans-serif;
+    }
+
+    .start-button {
+        align-self: center;
+      border-radius: 40px;
+      background-color: #0056D2;
+      margin-top: 86px;
+      gap: 10px;
+      overflow: hidden;
+      color: #fff;
+      white-space: nowrap;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.32px;
+      padding: 18px 60px;
+      font: 700 16px Plus Jakarta Sans, -apple-system, Roboto, Helvetica, sans-serif;
+      cursor: pointer;
+    }
+
+    /* Стили для страницы "Эпоха Возрождения" */
+    .renaissance-container {
+      background-color: #fff;
+      display: flex;
+      max-width: 480px;
+      width: 100%;
+      flex-direction: column;
+      overflow: hidden;
+      margin: 0 auto;
+      padding: 44px 21px;
+    }
+
+    .icon-wrapper {
+      border-radius: 5px;
+      display: flex;
+      width: 36px;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10px;
+    }
+
+    .icon {
+      aspect-ratio: 1;
+      object-fit: contain;
+      object-position: center;
+      width: 100%;
+    }
+
+    .heading {
+      color: var(--M3-sys-light-on-surface, var(--Schemes-On-Surface, #1d1b20));
+      text-align: center;
+      letter-spacing: var(--Headline-Small-Tracking, 0);
+      align-self: center;
+      margin-top: 69px;
+      font: 400 var(--Headline-Small-Size, 24px)/var(--Headline-Small-Line-Height, 32px) var(--Headline-Small-Font, Roboto);
+    }
+
+    .content {
+      border-radius: 30px;
+      background-color: rgb(109, 132, 233);
+      align-self: start;
+      color: #e0e0e0;
+      letter-spacing: var(--Body-Medium-Tracking, 0.25px);
+      margin: 32px 0 0 12px;
+      padding: 105px 24px 84px;
+      font: 400 var(--Body-Medium-Size, 14px)/var(--Body-Medium-Line-Height, 20px) var(--Body-Medium-Font, Roboto);
+    }
+
+    .content-result {
+      color: #000;
+      text-align: center;
+      margin-top: 20px;
+      font: 400 16px Plus Jakarta Sans, -apple-system, Roboto, Helvetica, sans-serif;
+    }
+
+    .next-button {
+      align-self: center;
+      border-radius: 40px;
+      background-color: rgb(0, 86, 210);
+      margin-top: 112px;
+      width: 100%;
+      max-width: 321px;
+      color: #fff;
+      white-space: nowrap;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.32px;
+      padding: 18px 60px;
+      font: 700 16px Plus Jakarta Sans, -apple-system, Roboto, Helvetica, sans-serif;
+      cursor: pointer;
+    }
+
+      .module-container {
+        background-color: #fff;
+        display: none; /* Скрыть контейнер */
+        max-width: 480px;
+        width: 100%;
+        flex-direction: column;
+        overflow: hidden;
+        align-items: start;
+        margin: 0 auto;
+        padding: 44px 21px;
+      }
+      
+      .status-wrapper {
+        display: flex;
+        gap: 48px;
+      }
+      
+      .icon-container {
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+      }
+      
+      .status-icon {
+        aspect-ratio: 1;
+        object-fit: contain;
+        object-position: center;
+        width: 16px;
+      }
+      
+      .status-text {
+        color: #000;
+        margin: auto 0;
+        font: 700 20px Plus Jakarta Sans, -apple-system, Roboto, Helvetica, sans-serif;
+      }
+      
+      .completion-message {
+        color: #000;
+        letter-spacing: 0.24px;
+        text-align: center;
+        align-self: center;
+        margin-top: 217px;
+        font: 400 24px/30px Plus Jakarta Sans, -apple-system, Roboto, Helvetica, sans-serif;
+      }
+      
+      .start-test-button {
+        align-self: stretch;
+        border-radius: 40px;
+        background-color: #0056D2;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.32px;
+        margin: 334px 0 0 14px;
+        padding: 18px 60px;
+        font: 700 16px Plus Jakarta Sans, -apple-system, Roboto, Helvetica, sans-serif;
+        cursor: pointer;
+        border: none;
+        transition: background-color 0.3s ease;
+      }
+      
+      .start-test-button:hover {
+        background-color: #0044a8;
+      }
+      
+      .start-test-button:focus {
+        outline: 2px solid #0044a8;
+        outline-offset: 2px;
+      }
+      
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+      }
+
+    .quiz-container {
+      background-color: #fff;
+      max-width: 480px;
+      width: 100%;
+      flex-direction: column;
+      overflow: hidden;
+      font-family: Inter, sans-serif;
+      color: #000;
+      font-weight: 700;
+      margin: 0 auto;
+      padding: 104px 0 44px;
+      display: flex;
+      align-items: center;
+    }
+      
+      .question-counter {
+        display: none;
+        font-size: 24px;
+        align-self: center;
+      }
+      
+    .question-wrapper {
+      display: none;
+      margin-top: 82px;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* Центрирование по вертикали */
+      font-size: 16px;
+      padding: 0 20px;
+    }
+      
+      .question-text {
+        font-size: 20px;
+        font-weight: 400;
+        align-self: stretch;
+      }
+      
+    .answer-option {
+      align-self: center;
+      border-radius: 12px;
+      background-color: #6D84E9;
+      min-height: 40px;
+      width: 174px;
+      text-align: center;
+      max-width: 100%;
+      padding: 11px 25px;
+      margin-top: 33px;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+      
+      .answer-option:first-of-type {
+        margin-top: 119px;
+      }
+      
+      .next-button {
+        align-self: center;
+        border-radius: 40px;
+        background-color: #0056D2;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        color: #fff;
+        white-space: nowrap;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.32px;
+        margin: 181px 0 0 15px;
+        padding: 18px 60px;
+        border: none;
+        cursor: pointer;
+      }
+
+    .next-button-test {
+      align-self: center;
+      border-radius: 40px;
+      background-color: #0056D2;
+      color: #fff;
+      white-space: nowrap;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.32px;
+      padding: 18px 60px;
+      font: 700 16px Plus Jakarta Sans, -apple-system, Roboto, Helvetica, sans-serif;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s ease;
+      margin-top: 20px; /* Добавлен отступ сверху */
+    }
+
+      .next-button-test:hover {
+        background-color: #0044a8;
+      }
+
+      .next-button-test:focus {
+        outline: 2px solid #0044a8;
+        outline-offset: 2px;
+      }
+      
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+      }
+
+      .answer-option {
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      .answer-option:hover {
+        background-color: #4a63c7;
+      }
+
+      .answer-option.selected {
+        background-color: #003399;
+        color: #fff;
+      }
+  </style>
+</head>
+<body>
+  <!-- Приветственная страница -->
+  <div id="welcomePage" class="welcome-container">
+    <h1 class="welcome-heading">
+      Шагните в мир
+      <br>
+      современного обучения
+    </h1>
+    <button id="startLearningBtn" class="start-learning-btn" tabindex="0">Начать обучение</button>
+  </div>
+
+  <!-- Главное меню -->
+  <div id="mainMenu" class="search-container" style="display: none;">
+    <div class="welcome-message">Здравствуй Гость</div>
+    <form class="search-bar" role="search">
+      <label for="searchInput" class="visually-hidden">Поиск</label>
+      <div class="search-icon-wrapper" aria-hidden="true">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dc42375aea81577118829a07157a85dbadf12d823f6b630ebd5f8f30c322f659?placeholderIfAbsent=true&apiKey=5bfedb6507c74c1ebc50e51c0f8e6548" class="search-icon" alt="" />
+      </div>
+      <input type="search" id="searchInput" class="search-placeholder" placeholder="Поиск" />
+    </form>
+    
+    <div class="topics">
+      <div id="historyTopic" class="topic">История</div>
+      <div class="topic">Математика</div>
+      <div class="topic">Мода</div>
+      <div class="topic">География</div>
+    </div>
+  </div>
+
+  <!-- Страница "История" -->
+  <div id="historyPage" class="history-container">
+    <div class="back-button">
+      <img 
+        loading="lazy"
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/af7a51aeb28f177a492b20c000ead4c1f278c3df1621b7ab63cb8167d832fdca?placeholderIfAbsent=true&apiKey=5bfedb6507c74c1ebc50e51c0f8e6548"
+        alt="Back to previous page"
+        class="back-icon"
+      />
+    </div>
+    <div class="category-badge" role="text">Обзор</div>
+    <h1 class="section-title">История</h1>
+    <p class="section-description">
+      Погрузитесь в мир величайших открытий человечества — от эпохи Великих
+      географических открытий до современных научных достижений. Узнайте о том,
+      как смелость и любопытство людей изменили нашу планету и дали начало новому
+      витку цивилизации.
+    </p>
+        <button id="startHistoryBtn" class="start-button" tabindex="0">Начать</button>
+  </div>
+
+  <!-- Страница "Эпоха Возрождения" -->
+  <div id="renaissancePage" class="renaissance-container" style="display: none;">
+    <div class="icon-wrapper">
+      <img loading="lazy" 
+      src="https://img.icons8.com/?size=100&id=26194&format=png&color=000000"
+      alt="" class="icon" />
+    </div>
+    <h1 class="heading">Эпоха Возрождения</h1>
+    <p class="content">
+      Эпоха Возрождения (XIV–XVI вв.) стала временем культурного и научного расцвета. В этот период были переосмыслены идеи античности, появились великие произведения искусства, науки и литературы. Именно тогда Леонардо да Винчи создал "Мону Лизу", а Микеланджело расписал Сикстинскую капеллу. Возрождение изменило представления людей о мире и их месте в нём.
+    </p>
+    <button id="nextRenaissanceBtn" class="next-button" tabindex="0">Далее</button>
+  </div>
+
+  <!-- Страница "Индустриальная революция" -->
+  <div id="industrialRevolutionPage" class="renaissance-container" style="display: none;">
+    <div class="icon-wrapper">
+      <img loading="lazy" src="https://img.icons8.com/?size=100&id=26194&format=png&color=000000" alt="" class="icon" />
+    </div>
+    <h1 class="heading">Индустриальная революция</h1>
+    <p class="content">
+      Индустриальная революция (XVIII–XIX вв.) ознаменовала переход от аграрного общества к индустриальному. В этот период произошли значительные изменения в производстве, транспорте и коммуникациях. Были изобретены паровые машины, железные дороги и телеграф. Эти достижения привели к быстрому росту городов и изменению образа жизни людей.
+    </p>
+    <button id="nextIndustrialRevolutionBtn" class="next-button" tabindex="0">Далее</button>
+  </div>
+
+  <!-- Страница "Великие географические открытия" -->
+  <div id="greatGeographicalDiscoveriesPage" class="renaissance-container" style="display: none;">
+    <div class="icon-wrapper">
+      <img loading="lazy" src="https://img.icons8.com/?size=100&id=26194&format=png&color=000000" alt="" class="icon" />
+    </div>
+    <h1 class="heading">Великие географические открытия</h1>
+    <p class="content">
+      Великие географические открытия (XV–XVII вв.) открыли новые земли и морские пути. Исследователи, такие как Христофор Колумб, Васко да Гама и Фернан Магеллан, расширили горизонты человечества, открыв Америку, путь в Индию и совершив первое кругосветное плавание. Эти открытия изменили мировую торговлю и культурные обмены.
+    </p>
+    <button id="nextGreatGeographicalDiscoveriesBtn" class="next-button" tabindex="0">Далее</button>
+  </div>
+
+  <div id="moduleContainer" class="module-container">
+    <div class="status-wrapper">
+      <div class="icon-container">
+        <img
+          loading="lazy"
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/6615cc0225fc3b060669f6f8d3bc44c58c6c8fadd191d4643042fe502d6cb1b5?placeholderIfAbsent=true&apiKey=5bfedb6507c74c1ebc50e51c0f8e6548"
+          class="status-icon"
+          alt="Module completion checkmark"
+        />
+      </div>
+      <div class="status-text">Модуль завершён</div>
+    </div>
+    <div class="completion-message">
+      Прекрасный
+      <br />
+      результат!
+      <br />
+      Продолжайте осваивать новые знания
+    </div>
+    <button class="start-test-button" tabindex="0">Начать тест</button>
+  </div>
+
+  <!-- Форма с вопросом и ответами -->
+  <div id="quizForm1" class="quiz-container" style="display: none;">
+    <div class="question-counter"></div>
+    <div class="question-wrapper">
+      <div class="question-text"></div>
+      <button class="answer-option"></button>
+      <button class="answer-option"></button>
+      <button class="answer-option"></button>
+    </div>
+    <button class="next-button-test" tabindex="0">Далее</button>
+  </div>
+
+  <!-- Завершающая страница с результатами теста -->
+  <div id="resultPage" class="renaissance-container" style="display: none;">
+    <h1 class="heading">Результаты теста</h1>
+    <div id="resultContent" class="-resucontentlt"></div>
+    <button id="backToModulesBtn" class="next-button-test" tabindex="0">Вернуться к модулям</button>
+  </div>
+  
+
+  <script>
+    document.getElementById('startLearningBtn').addEventListener('click', function() {
+      document.getElementById('welcomePage').style.display = 'none';
+      document.getElementById('mainMenu').style.display = 'block';
+    });
+
+    document.getElementById('historyTopic').addEventListener('click', function() {
+      document.getElementById('mainMenu').style.display = 'none';
+      document.getElementById('historyPage').style.display = 'flex';
+    });
+
+    document.getElementById('startHistoryBtn').addEventListener('click', function() {
+      document.getElementById('historyPage').style.display = 'none';
+      document.getElementById('renaissancePage').style.display = 'flex';
+    });
+
+    document.getElementById('nextRenaissanceBtn').addEventListener('click', function() {
+      // Здесь можно добавить код для перехода на следующую карточку
+      document.getElementById('renaissancePage').style.display = 'none';
+      document.getElementById('industrialRevolutionPage').style.display = 'flex';
+      
+
+      document.getElementById('nextIndustrialRevolutionBtn').addEventListener('click', function() {
+        document.getElementById('industrialRevolutionPage').style.display = 'none';
+        document.getElementById('greatGeographicalDiscoveriesPage').style.display = 'flex';
+      });
+
+      document.getElementById('nextGreatGeographicalDiscoveriesBtn').addEventListener('click', function() {
+        // Здесь можно добавить код для перехода на следующую карточку
+        document.getElementById('greatGeographicalDiscoveriesPage').style.display = 'none';
+        document.getElementById('moduleContainer').style.display = 'flex';
+      });
+    });
+
+    document.querySelector('.start-test-button').addEventListener('click', function() {
+      document.getElementById('moduleContainer').style.display = 'none';
+      quizForm1.style.display = 'flex';
+      loadQuestion(currentQuestionIndex);
+    });
+
+
+    const quizForm1 = document.getElementById('quizForm1');
+    const questionCounter = document.querySelector('.question-counter');
+    const questionWrapper = document.querySelector('.question-wrapper');
+    const nextButton = document.querySelector('.next-button-test');
+
+    const questions = [
+      {
+      question: 'Какой художник считается одним из символов эпохи Возрождения?',
+      options: ['Пабло Пикассо', 'Леонардо да Винчи', 'Винсент Ван Гог'],
+      correct: 1
+      },
+      {
+      question: 'Какой из изобретений стало основой индустриальной революции?',
+      options: ['Электричество', 'Паровая машина', 'Телевизор'],
+      correct: 1
+      },
+      {
+      question: 'Кто первым открыл морской путь в Индию?',
+      options: ['Христофор Колумб', 'Магеллан', 'Васко да Гама'],
+      correct: 2
+      },
+      {
+      question: 'Что стало символом начала космической гонки во время Холодной войны?',
+      options: ['Полёт на Луну', 'Первый спутник', 'Запуск марсохода'],
+      correct: 1
+      },
+      {
+      question: 'В каком веке началась эпоха Возрождения?',
+      options: ['XIX', 'XIV', 'XVII'],
+      correct: 1
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+
+    function loadQuestion(index) {
+      const question = questions[index];
+      questionWrapper.querySelector('.question-text').textContent = question.question;
+      const options = questionWrapper.querySelectorAll('.answer-option');
+      options.forEach((option, i) => {
+      option.textContent = question.options[i];
+      option.classList.remove('selected');
+      option.onclick = () => {
+        options.forEach(opt => opt.classList.remove('selected'));
+        option.classList.add('selected');
+        question.selectedAnswer = option.textContent;
+      };
+      });
+      questionCounter.textContent = `${index + 1}/${questions.length}`;
+      questionCounter.style.display = 'block';
+      questionWrapper.style.display = 'flex';
+    }
+
+    nextButton.addEventListener('click', () => {
+      const selectedOption = questionWrapper.querySelector('.answer-option.selected');
+      if (selectedOption) {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < questions.length) {
+        loadQuestion(currentQuestionIndex);
+      } else {
+        quizForm1.style.display = 'none';
+        document.getElementById('resultPage').style.display = 'flex';
+        const resultContent = document.getElementById('resultContent');
+        resultContent.innerHTML = '<h2>Ваши результаты:</h2>';
+        questions.forEach((question, index) => {
+          const questionResult = document.createElement('div');
+          questionResult.classList.add('question-result');
+          const selectedAnswer = question.selectedAnswer ? question.selectedAnswer : 'Не выбран';
+          const isCorrect = selectedAnswer === question.options[question.correct];
+          questionResult.innerHTML = `
+            <p><strong>Вопрос ${index + 1}:</strong> ${question.question}</p>
+            <p><strong>Ваш ответ:</strong> <span style="color: ${isCorrect ? 'green' : 'red'};">${selectedAnswer}</span></p>
+            <p><strong>Правильный ответ:</strong> ${question.options[question.correct]}</p>
+          `;
+          resultContent.appendChild(questionResult);
+          resultContent.appendChild(questionResult);
+        });
+      }
+      } else {
+      alert('Пожалуйста, выберите ответ.');
+      }
+    });
+
+    loadQuestion(currentQuestionIndex);
+
+    document.getElementById('backToModulesBtn').addEventListener('click', function() {
+      document.getElementById('resultPage').style.display = 'none';
+      document.getElementById('mainMenu').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
